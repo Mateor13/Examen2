@@ -26,15 +26,17 @@ public class login extends JFrame{
                 String user = "root";
                 String pass = "123456";
                 String querry = "select * from usuario where username= '"+nm.getText()+"' and password= '"+cl.getText()+"'";
+                if (nm.getText().isEmpty()&&cl.getText().isEmpty()){
+                    res.setText("Ingrese todos los campos");
+                }
                 try (Connection con = DriverManager.getConnection(url, user, pass)){
+                    credenciales cre = new credenciales(nm.getText(), cl.getText());
                     Statement st = con.createStatement();
                     ResultSet rs = st.executeQuery(querry);
                     if (rs.next()) {
                         String us = rs.getString("username");
                         String pas = rs.getString("password");
-                        String nm1 = nm.getText();
-                        String cl1 = cl.getText();
-                        if (nm1.equals(us) && cl1.equals(pas)) {
+                        if (cre.getUser().equals(us) && cre.getPass().equals(pas)) {
                             new Insertar();
                             dispose();
                         }

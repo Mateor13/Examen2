@@ -31,8 +31,9 @@ public class buscar extends JFrame {
                 String url = "jdbc:mysql://localhost:3306/productos_cp";
                 String user = "root";
                 String pass = "123456";
-                String querry = "select * from producto where codigo_producto = '"+co.getText()+"'";
                 try (Connection con = DriverManager.getConnection(url, user, pass)){
+                    Productos pro = new Productos(co.getText());
+                    String querry = "select * from producto where codigo_producto = '"+pro.getCodigo()+"'";
                     Statement st = con.createStatement();
                     ResultSet rs = st.executeQuery(querry);
                     if (rs.next()){

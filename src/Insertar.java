@@ -31,20 +31,21 @@ public class Insertar extends JFrame {
                 String url = "jdbc:mysql://localhost:3306/productos_cp";
                 String user = "root";
                 String pass = "123456";
-                String querry = "Insert into producto (codigo_producto, nombre, descripcion, precio, cantidad, categoria) values (?,?,?,?,?,?)";
                 if (cod.getText().isEmpty()||nm.getText().isEmpty()||des.getText().isEmpty()||pre.getText().isEmpty()||can.getText().isEmpty()||cat.getText().isEmpty()){
                     res.setText("Llene todos los campos");
                 }else {
                     try (Connection con = DriverManager.getConnection(url, user, pass)) {
-                        PreparedStatement ps = con.prepareStatement(querry);
                         int cant = Integer.parseInt(can.getText());
                         double pre1 = Double.parseDouble(pre.getText());
-                        ps.setString(1, cod.getText());
-                        ps.setString(2, nm.getText());
-                        ps.setString(3, des.getText());
-                        ps.setDouble(4, pre1);
-                        ps.setInt(5, cant);
-                        ps.setString(6, cat.getText());
+                        String querry = "Insert into producto (codigo_producto, nombre, descripcion, precio, cantidad, categoria) values (?,?,?,?,?,?)";
+                        Productos pr = new Productos(cod.getText(), nm.getText(), des.getText(), cat.getText(), pre1, cant);
+                        PreparedStatement ps = con.prepareStatement(querry);
+                        ps.setString(1, pr.getCodigo());
+                        ps.setString(2, pr.getNombre());
+                        ps.setString(3, pr.getDescripcion());
+                        ps.setDouble(4, pr.getPrecio());
+                        ps.setInt(5, pr.getCantidad());
+                        ps.setString(6, pr.getCategoria());
                         ps.executeUpdate();
                         res.setText("Ingresado Exitosamente");
                     } catch (SQLException e1) {
