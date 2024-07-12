@@ -2,7 +2,7 @@ public class Productos {
     String codigo, nombre, descripcion, categoria;
     double precio;
     int cantidad;
-    public Productos(String text) {}
+    public Productos() {}
 
     public Productos(String codigo, String nombre, String descripcion, String categoria, double precio, int cantidad) {
         this.codigo = codigo;

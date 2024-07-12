@@ -32,7 +32,9 @@ public class buscar extends JFrame {
                 String user = "root";
                 String pass = "123456";
                 try (Connection con = DriverManager.getConnection(url, user, pass)){
-                    Productos pro = new Productos(co.getText());
+                    Productos pro = new Productos();
+                    pro.setCodigo(co.getText());
+
                     String querry = "select * from producto where codigo_producto = '"+pro.getCodigo()+"'";
                     Statement st = con.createStatement();
                     ResultSet rs = st.executeQuery(querry);
