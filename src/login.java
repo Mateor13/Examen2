@@ -34,13 +34,12 @@ public class login extends JFrame{
                         String pas = rs.getString("password");
                         String nm1 = nm.getText();
                         String cl1 = cl.getText();
-                        if (!(nm1.equals(us) && cl1.equals(pas))) {
-                            res.setText("Usuario Incorrecto");
-                        }else{
-
+                        if (nm1.equals(us) && cl1.equals(pas)) {
                             new Insertar();
                             dispose();
                         }
+                    }else{
+                        res.setText("Usuario Incorrecto");
                     }
                 }catch (SQLException e1){
                     e1.printStackTrace();
